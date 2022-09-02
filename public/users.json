@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "gender": "male",
+        "name": "Tushar Kumar Shaha",
+        "contact": "0123456789",
+        "address": "Chittagong, Bangladesh",
+        "photoUrl": "tushar.jpg"
+    },
+    {
+        "id": 1,
+        "gender": "male",
+        "name": "Mijanur Rahaman Mijan",
+        "contact": "0123456789",
+        "address": "Chittagong, Bangladesh",
+        "photoUrl": "mijan.jpg"
+    },
+    {
+        "id": 1,
+        "gender": "male",
+        "name": "Samsul Arefin Tanvir",
+        "contact": "0123456789",
+        "address": "Chittagong, Bangladesh",
+        "photoUrl": "samsul.jpg"
+    },
+    {
+        "id": 1,
+        "gender": "male",
+        "name": "Rabi Chawdhuri",
+        "contact": "0123456789",
+        "address": "Chittagong, Bangladesh",
+        "photoUrl": "rabi.jpg"
+    }
+]
