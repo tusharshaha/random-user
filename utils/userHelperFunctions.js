@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 
-const FILE_PATH = "./public/users.json";
+const FILE_PATH = `${process.cwd()}/public/users.json`;
 
 module.exports.allUser = async (limit) => {
     let allUser;
