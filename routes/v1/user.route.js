@@ -9,5 +9,9 @@ router.get("/random", userController.getRandomUser);
 router.get("/all", userController.getAllUsers);
 // save random user
 router.post("/save", filedValidation, userController.saveRandomUser);
+// update random user
+router.patch("/update/:id", userController.updateRandomUser);
+// delete random user
+router.delete("/delete/:id", userController.deleteRandomUser);
 
 module.exports = router;

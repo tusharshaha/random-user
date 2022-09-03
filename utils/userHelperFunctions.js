@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 
-const FILE_PATH = "./public/users.json"
+const FILE_PATH = "./public/users.json";
 
 module.exports.allUser = async (limit) => {
     let allUser;
@@ -22,8 +22,33 @@ module.exports.allUser = async (limit) => {
 
 module.exports.saveUser = async (user) => {
     const users = await this.allUser();
-    await users.push({id: users.length + 1, ...user});
+    await users.push({ id: users.length + 1, ...user });
     const stringifyUsers = JSON.stringify(users);
     const data = await fs.promises.writeFile(FILE_PATH, stringifyUsers, "utf-8");
-    return data
+    return data;
+}
+
+module.exports.updateUser = async (id, user) => {
+    const allUser = await this.allUser();
+    const index = allUser.findIndex(ele => ele.id === Number(id));
+    if (index >= 0) {
+        allUser[index].name = user.name || allUser[index].name;
+        allUser[index].gender = user.gender || allUser[index].gender;
+        allUser[index].contact = user.contact || allUser[index].contact;
+        allUser[index].address = user.address || allUser[index].address;
+        allUser[index].photoUrl = user.photoUrl || allUser[index].photoUrl;
+    }else{
+        throw new Error("User id not found!");
+    }
+    const stringifyUsers = JSON.stringify(allUser);
+    const data = await fs.promises.writeFile(FILE_PATH, stringifyUsers, "utf-8");
+    return data;
+}
+
+module.exports.deleteUser = async (id) => {
+    const users = await this.allUser();
+    const dUser = users.filter(user => user.id !== Number(id))
+    const stringifyUser = JSON.stringify(dUser);
+    const data = await fs.promises.writeFile(FILE_PATH, stringifyUser, "utf-8");
+    return data;
 }

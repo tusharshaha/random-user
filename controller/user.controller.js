@@ -1,7 +1,6 @@
 const fs = require("fs");
 const userHelper = require("../utils/userHelperFunctions");
 
-const FILE_PATH = "./public/users.json"
 
 module.exports.getRandomUser = async (req, res) => {
     const users = await userHelper.allUser();
@@ -38,8 +37,8 @@ module.exports.getAllUsers = async (req, res) => {
 }
 
 module.exports.saveRandomUser = async (req, res) => {
-    const newUser = req.body;
-    await userHelper.saveUser(newUser)
+    const { name, gender, contact, address, photoUrl } = req.body;
+    await userHelper.saveUser({ name, gender, contact, address, photoUrl })
         .then(() => {
             res.status(200).send({
                 success: true,
@@ -53,4 +52,47 @@ module.exports.saveRandomUser = async (req, res) => {
 
         })
 
+}
+
+module.exports.updateRandomUser = async (req, res) => {
+    const { id } = req.params;
+    const { name, gender, contact, address, photoUrl } = req.body;
+    const updatedUser = { name, gender, contact, address, photoUrl };
+    await userHelper.updateUser(id, updatedUser)
+        .then(() => {
+            res.status(200).send({
+                success: true,
+                message: "Successfully updated user"
+            })
+        }).catch((err) => {
+            res.status(500).send({
+                success: false,
+                error: err.message
+            })
+
+        })
+}
+
+module.exports.deleteRandomUser = async (req, res) => {
+    const { id } = req.params;
+    if (!id || !Number(id)) {
+        res.status(500).send({
+            success: false,
+            error: "Enter valid id"
+        })
+        return;
+    }
+    await userHelper.deleteUser(id)
+        .then(() => {
+            res.status(200).send({
+                success: true,
+                message: "Successfully deleted user"
+            })
+        }).catch(() => {
+            res.status(500).send({
+                success: false,
+                error: "Intarnal server error!"
+            })
+
+        })
 }
