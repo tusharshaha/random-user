@@ -37,18 +37,20 @@ module.exports.getAllUsers = async (req, res) => {
     }
 }
 
-module.exports.saveRandomUser = (req, res) => {
-    const newUser = JSON.stringify(reqBody)
-    fs.appendFile(FILE_PATH, newUser, (err) => {
-        err ?
-            res.status(500).send({
-                success: false,
-                error: "Required property are missing"
-            })
-            :
+module.exports.saveRandomUser = async (req, res) => {
+    const newUser = req.body;
+    await userHelper.saveUser(newUser)
+        .then(() => {
             res.status(200).send({
                 success: true,
                 message: "Successfully saved user"
             })
-    })
+        }).catch(() => {
+            res.status(500).send({
+                success: false,
+                error: "Required property are missing"
+            })
+
+        })
+
 }

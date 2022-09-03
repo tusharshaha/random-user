@@ -1,5 +1,5 @@
 const filedValidation = (req, res, next) => {
-    const { gender, name, contact, adderss, photoUrl } = req.body;
+    const { gender, name, contact, address, photoUrl } = req.body;
     if (!gender) {
         res.status(500).send({
             success: false,
@@ -15,7 +15,7 @@ const filedValidation = (req, res, next) => {
             success: false,
             error: "Contact is required!"
         })
-    } else if (!adderss) {
+    } else if (!address) {
         res.status(500).send({
             success: false,
             error: "Address is required!"

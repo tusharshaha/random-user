@@ -19,3 +19,11 @@ module.exports.allUser = async (limit) => {
     }
     return allUser;
 }
+
+module.exports.saveUser = async (user) => {
+    const users = await this.allUser();
+    await users.push({id: users.length + 1, ...user});
+    const stringifyUsers = JSON.stringify(users);
+    const data = await fs.promises.writeFile(FILE_PATH, stringifyUsers, "utf-8");
+    return data
+}
