@@ -58,6 +58,13 @@ module.exports.updateRandomUser = async (req, res) => {
     const { id } = req.params;
     const { name, gender, contact, address, photoUrl } = req.body;
     const updatedUser = { name, gender, contact, address, photoUrl };
+    if (!id || !Number(id)) {
+        res.status(500).send({
+            success: false,
+            error: "Enter valid id"
+        })
+        return;
+    }
     await userHelper.updateUser(id, updatedUser)
         .then(() => {
             res.status(200).send({
