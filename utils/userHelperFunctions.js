@@ -10,10 +10,11 @@ module.exports.allUser = async (limit) => {
         return;
     } else {
         const users = JSON.parse(data);
+        const suffleUser = users.sort(() => Math.random() - 0.5);
         if (limit >= 0 && limit <= users.length && Number(limit)) {
-            allUser = users.slice(0, limit);
+            allUser = suffleUser.slice(0, limit);
         } else {
-            allUser = users
+            allUser = suffleUser;
         }
     }
     return allUser;
