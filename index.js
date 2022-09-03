@@ -20,10 +20,3 @@ app.all("*", (req, res) => {
 app.listen(port, () => {
     console.log(`listening from port ${port}`)
 })
-// global error handler
-process.on("unhandledRejection", (error) => {
-    console.log(error.name, error.message);
-    app.close(() => {
-        process.exit(1);
-    });
-});
